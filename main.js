@@ -1,4 +1,5 @@
 // the 3 messages we will output will be: 1. A daily productivity task, 2. Self care activity 3. Creative inspiration
+// tasks: create a time of day function and use that to help decide what activities will be displayed 
 
 const productivityTasks = [
   "making your bed!",
@@ -31,9 +32,9 @@ const creativeInspiration = [
   "http://www.mr-cup.com/blog.html",
 ];
 
-const randomTask = (array) => {
-  const index = Math.floor(Math.random() * array.length);
-  return array[index];
+const randomTask = (taskArray) => {
+  const index = Math.floor(Math.random() * taskArray.length);
+  return taskArray[index];
 };
 
 console.log(
@@ -47,3 +48,15 @@ console.log(
     creativeInspiration
   )}`
 );
+const timeOfDay = () => {
+    const date = new Date()
+    const hours = date.getHours()
+    if (hours > 17) {
+        return "Good Evening"
+    } else if (hours > 11) {
+        return "Good Afternoon"
+    } else {
+        return "Good Morning"
+    }
+}
+console.log(timeOfDay())
