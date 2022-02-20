@@ -1,27 +1,49 @@
-// the 3 messages we will output will be: 1. A daily productivity task, 2. Self care activity 3. Creative inspiration
-// tasks: create a time of day function and use that to help decide what activities will be displayed 
+const EVENING = 'evening'
+const MORNING = 'morning'
+const AFTERNOON = 'afternoon'
 
-const productivityTasks = [
-  "making your bed!",
-  "emptying your dishwasher!",
-  "taking out the bins!",
-  "watering the plants!",
-  "folding your laundry!",
-  "doing the laundry!",
-  "hoovering up!",
-  "doing the dusting!",
-];
-const selfCareActivity = [
-  "brushing your teeth",
-  "giving yourself a foot scrub",
-  "having a bubble bath",
-  "giving yourself a facial",
-  "going for a walk",
-  "meditating",
-  "completing a 10 minute yoga workout",
-  "putting your phone on 'do not disturb'",
-  "picking up a craft",
-];
+const productivityTasks = {
+  [MORNING]: [
+    "making your bed!",
+    "watering the plants!",
+    "opening all your curtians and blinds!",
+    "emptying the dishwasher!",
+  ],
+  [AFTERNOON]: [
+    "doing the laundry!",
+    "hoovering up!",
+    "dusting surfaces!",
+    "taking out the bins!"
+  ],
+  [EVENING]: [
+    "loading the dishwasher!",
+    "cleaning down the kitchen surfances",
+    "folding the laundry!",
+    "closing all blinds and turning on lamps!"
+  ],
+};
+
+const selfCareActivity = {
+  [MORNING]: [
+    "brushing your teeth!",
+    "washing your face!",
+    "going outisde for a morning stroll!",
+    "complete a 10 minute yoga workout!"
+  ],
+  [AFTERNOON]: [
+    "putting your phone on 'do not disturb!'",
+    "meditiating!",
+    "taking a 15 minute break from your screen!",
+    "drinking 250ml of water!"
+  ],
+  [EVENING]: [
+  "giving yourself a foot scrub!",
+  "having a bubble bath!",
+  "giving yourself a facial!",
+  "picking up a craft!"
+  ]
+}
+
 const creativeInspiration = [
   "https://wetransfer.com/thisworks/",
   "http://www.mymodernmet.com/",
@@ -37,26 +59,27 @@ const randomTask = (taskArray) => {
   return taskArray[index];
 };
 
+const getTimeOfDay = () => {
+  const date = new Date();
+  const hours = date.getHours();
+  if (hours > 17) {
+    return EVENING;
+  } else if (hours > 11) {
+    return AFTERNOON;
+  } else {
+    return MORNING;
+  }
+};
+const timeOfDay = getTimeOfDay()
+
 console.log(
-  `Start the day off productively by ${randomTask(productivityTasks)}`
+  `Start your ${timeOfDay} off productively by ${randomTask(productivityTasks[timeOfDay])}`
 );
 console.log(
-  `Make sure to look after yourself today by ${randomTask(selfCareActivity)}`
+  `Make sure to look after yourself this ${timeOfDay} by ${randomTask(selfCareActivity[timeOfDay])}`
 );
 console.log(
   `Feel creatively inspired today through taking a peek at ${randomTask(
     creativeInspiration
   )}`
 );
-const timeOfDay = () => {
-    const date = new Date()
-    const hours = date.getHours()
-    if (hours > 17) {
-        return "Good Evening"
-    } else if (hours > 11) {
-        return "Good Afternoon"
-    } else {
-        return "Good Morning"
-    }
-}
-console.log(timeOfDay())
